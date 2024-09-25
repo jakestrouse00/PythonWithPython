@@ -12,8 +12,7 @@ permissions:
 env:
   INSTANCE: 'Writerside/PythonWithPython'
   ARTIFACT: 'webHelpIN2-all.zip'
-  DOCKER_VERSION: '242.21870'
-
+  DOCKER_VERSION: '242.21870''
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -36,9 +35,9 @@ jobs:
           name: docs
           path: |
             artifacts/${{ env.ARTIFACT }}
+            artifacts/report.json
           retention-days: 7
-
-test:
+  test:
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -52,8 +51,7 @@ test:
         uses: JetBrains/writerside-checker-action@v1
         with:
           instance: ${{ env.INSTANCE }}
-
-deploy:
+  deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

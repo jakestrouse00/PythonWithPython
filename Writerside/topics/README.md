@@ -122,6 +122,7 @@ If you want to use defaults, pydantic.dataclass.Field, or reference one dataclas
 from pydantic.dataclasses import dataclass, Field
 from PythonWithPython import *
 
+
 @dataclass
 class Book:
     title: str
@@ -134,7 +135,18 @@ class Book:
     def update_title(self, new_title: str) -> None:
         self.title = new_title
 
-book = PythonClass(name='Book', arguments=[PythonArgument(name='title', type_hint=str), PythonArgument(name='author', type_hint=str), PythonArgument(name='published_year', type_hint=int)], inherits=None, functions=[PythonFunction(name='is_classic', arguments=[], body=[PythonCode(content='return self.published_year < 1970', comment=None)], return_type=bool, method=PythonMethods(static_method=False, class_method=False, property_method=False), in_class=True), PythonFunction(name='update_title', arguments=[PythonArgument(name='new_title', type_hint=str)], body=[PythonCode(content='self.title = new_title', comment=None)], return_type=None, method=PythonMethods(static_method=False, class_method=False, property_method=False), in_class=True)])
+
+book = PythonClass(name='Book',
+                   arguments=[PythonArgument(name='title', type_hint=str), PythonArgument(name='author', type_hint=str),
+                              PythonArgument(name='published_year', type_hint=int)], inherits=None, functions=[
+        PythonFunction(name='is_classic', arguments=[],
+                       body=[PythonCode(content='return self.published_year < 1970', comment=None)], return_type=bool,
+                       method=PythonMethods(static_method=False, class_method=False, property_method=False),
+                       in_class=True),
+        PythonFunction(name='update_title', arguments=[PythonArgument(name='new_title', type_hint=str)],
+                       body=[PythonCode(content='self.title = new_title', comment=None)], return_type=None,
+                       method=PythonMethods(static_method=False, class_method=False, property_method=False),
+                       in_class=True)])
 # Verify results
 print(book.render())
 ```

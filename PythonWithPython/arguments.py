@@ -1,23 +1,15 @@
 from __future__ import annotations
 
-from dataclasses import field
 from types import *
 from typing import *
 
-import typing_extensions
-from pydantic import AliasChoices, AliasPath, Discriminator, PydanticUndefinedAnnotation
-from pydantic.dataclasses import dataclass, Field, FieldInfo
-from pydantic.fields import Deprecated, JsonDict, _EmptyKwargs, _Unset
-from pydantic.v1.config import inherit_config
-from pydantic.v1.schema import field_schema
-from pydantic_core import PydanticUndefined, PydanticUndefinedType
-import annotated_types
+from pydantic.fields import _Unset
+from pydantic_core import PydanticUndefinedType
+
 from .fields import PythonField
 from .utils import tab_spacing
 
 __all__ = ["PythonArgument"]
-
-
 
 
 class PythonArgument:
@@ -55,7 +47,9 @@ class PythonArgument:
         elif isinstance(self.type_hint, type):
             type_hint_name = self.type_hint.__name__
         else:
-            type_hint_name = repr(self.type_hint).replace("typing.", "").replace("ForwardRef('", "").replace("')", "").replace("PythonWithPython.classes.", "")
+            type_hint_name = repr(self.type_hint).replace("typing.", "").replace("ForwardRef('", "").replace("')",
+                                                                                                             "").replace(
+                "PythonWithPython.classes.", "")
         if render_type == "class":
             return f"{indent_str}{self.name}: {type_hint_name}{field_str}"
         else:

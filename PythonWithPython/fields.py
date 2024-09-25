@@ -1,18 +1,13 @@
 from __future__ import annotations
 
-from dataclasses import field
-from types import *
 from typing import *
 
+import annotated_types
 import typing_extensions
 from pydantic import AliasChoices, AliasPath, Discriminator
-from pydantic.dataclasses import dataclass, Field, FieldInfo
+from pydantic.dataclasses import FieldInfo
 from pydantic.fields import Deprecated, JsonDict, _EmptyKwargs, _Unset
-from pydantic.v1.config import inherit_config
-from pydantic.v1.schema import field_schema
 from pydantic_core import PydanticUndefined
-import annotated_types
-from .utils import tab_spacing
 
 __all__ = ["PythonField"]
 

@@ -1,20 +1,11 @@
 from __future__ import annotations
 
-from dataclasses import field
-from types import *
 from typing import *
 
-import typing_extensions
-from pydantic import AliasChoices, AliasPath, Discriminator, create_model
-from pydantic.dataclasses import dataclass, Field, FieldInfo
-from pydantic.fields import Deprecated, JsonDict, _EmptyKwargs, _Unset
-from pydantic.v1.config import inherit_config
-from pydantic.v1.schema import field_schema
-from pydantic_core import PydanticUndefined
-import annotated_types
+from pydantic import create_model
+
 from .arguments import PythonArgument
-from .functions import PythonFunction, PythonMethods
-from .fields import PythonField
+from .functions import PythonFunction
 from .utils import tab_spacing
 
 __all__ = ["PythonClass"]
@@ -55,10 +46,3 @@ class PythonClass:
 
     def preview(self):
         return f"PythonClass(name='{self.name}', arguments=[{', '.join([arg.preview() for arg in self.arguments])}], inherits={self.inherits}, functions=[{', '.join([func.preview() for func in self.functions])}])"
-
-
-
-
-
-
-

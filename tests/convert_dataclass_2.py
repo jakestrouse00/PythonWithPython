@@ -1,7 +1,11 @@
 from __future__ import annotations
+
 from typing import *
+
+from pydantic.dataclasses import Field, dataclass
+
 from PythonWithPython import *
-from pydantic.dataclasses import dataclass, Field
+
 
 @dataclass
 class Book:
@@ -14,6 +18,7 @@ class Book:
 
     def update_title(self, new_title: str) -> None:
         self.title = new_title
+
 
 @dataclass
 class Library:

@@ -1,12 +1,13 @@
 from __future__ import annotations
-from typing import *
-from PythonWithPython import *
+
 from pydantic.dataclasses import dataclass
 
+from PythonWithPython import *
 
 """
 Convert a Python dataclass into PythonWithPython syntax
 """
+
 
 @dataclass
 class Book:

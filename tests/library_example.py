@@ -1,5 +1,7 @@
 from __future__ import annotations
+
 from typing import *
+
 from PythonWithPython import *
 
 book = PythonClass("Book", [
@@ -21,7 +23,8 @@ library = PythonClass("Library", [
                           PythonFunction("add_book", [PythonArgument("book", Book)], ["self.books.append(book)"], None,
                                          in_class=True),
                           PythonFunction("find_books_by_author", [PythonArgument("author", str)],
-                                         [PythonCode("return [book for book in self.books if book.author == author]")], List[Book],
+                                         [PythonCode("return [book for book in self.books if book.author == author]")],
+                                         List[Book],
                                          in_class=True),
                           PythonFunction("list_all_titles", [],
                                          ["return [book.title for book in self.books]"], List[str], in_class=True)
@@ -29,4 +32,3 @@ library = PythonClass("Library", [
 
 print(book.render())
 print(library.render())
-

@@ -32,3 +32,6 @@ library = PythonClass("Library", [
 
 print(book.render())
 print(library.render())
+
+print(book.preview())
+print(library.preview())

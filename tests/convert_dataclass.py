@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from pydantic.dataclasses import dataclass
+from pydantic.dataclasses import dataclass, Field
 
 from PythonWithPython import *
 
@@ -13,7 +13,7 @@ Convert a Python dataclass into PythonWithPython syntax
 class Book:
     title: str
     author: str
-    published_year: int
+    published_year: int = Field(default=2022)
 
     def is_classic(self) -> bool:
         return self.published_year < 1970
@@ -28,3 +28,4 @@ print(pwp_code)
 # recreated_book_class.render() should return Python code that looks exactly like the Book dataclass defined above
 original_dataclass = recreated_book_class.render()
 print(original_dataclass)
+

@@ -16,6 +16,7 @@ __all__ = ['recreate_class']
 
 
 def parse_default_value(field) -> Any:
+    print(field)
     if "_MISSING_TYPE" in field.default.__repr__():
         return _Unset
     if "_MISSING_TYPE" in field.default_factory.__repr__():

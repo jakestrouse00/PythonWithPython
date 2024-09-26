@@ -8,9 +8,8 @@ from pydantic_core import PydanticUndefinedType
 from .arguments import PythonArgument
 from .code import PythonCode
 from .methods import PythonMethods
-from .utils import tab_spacing
 from .utils import remove_forward_ref
-
+from .utils import tab_spacing
 
 __all__ = ["PythonFunction"]
 

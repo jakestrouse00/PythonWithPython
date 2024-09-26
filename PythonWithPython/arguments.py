@@ -7,7 +7,7 @@ from pydantic.fields import _Unset
 from pydantic_core import PydanticUndefinedType
 
 from .fields import PythonField
-from .utils import tab_spacing, remove_forward_ref
+from .utils import remove_forward_ref, tab_spacing
 
 __all__ = ["PythonArgument"]
 

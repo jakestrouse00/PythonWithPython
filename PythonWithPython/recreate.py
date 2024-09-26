@@ -5,13 +5,13 @@ from dataclasses import fields
 from typing import *
 
 from pydantic.dataclasses import is_pydantic_dataclass
-from pydantic.fields import _Unset, FieldInfo
+from pydantic.fields import FieldInfo, _Unset
 
 from .arguments import PythonArgument
 from .classes import PythonClass
 from .code import PythonCode
-from .functions import PythonFunction
 from .fields import PythonField
+from .functions import PythonFunction
 
 __all__ = ['recreate_class']
 

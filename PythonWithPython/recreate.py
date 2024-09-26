@@ -5,23 +5,37 @@ from dataclasses import fields
 from typing import *
 
 from pydantic.dataclasses import is_pydantic_dataclass
-from pydantic.fields import _Unset
+from pydantic.fields import _Unset, FieldInfo
 
 from .arguments import PythonArgument
 from .classes import PythonClass
 from .code import PythonCode
 from .functions import PythonFunction
+from .fields import PythonField
 
 __all__ = ['recreate_class']
 
 
 def parse_default_value(field) -> Any:
-    print(field)
+    if isinstance(field.default, FieldInfo):
+        result_dict = {}
+        for key_value in field.default.__str__().split(" "):
+            split_value = key_value.split('=')
+            try:
+                result_dict[split_value[0]] = eval(split_value[1])
+            except NameError:
+                result_dict[split_value[0]] = ForwardRef(split_value[1])
+
+        if "annotation" in result_dict:
+            result_dict.pop("annotation")
+
+        return PythonField(**result_dict)
     if "_MISSING_TYPE" in field.default.__repr__():
         return _Unset
     if "_MISSING_TYPE" in field.default_factory.__repr__():
         return _Unset
-    return None
+
+    return field.default
 
 
 def parse_arguments(cls) -> List[PythonArgument]:

@@ -8,8 +8,12 @@ from pydantic import AliasChoices, AliasPath, Discriminator
 from pydantic.dataclasses import FieldInfo
 from pydantic.fields import Deprecated, JsonDict, _EmptyKwargs, _Unset
 from pydantic_core import PydanticUndefined
+from .utils import remove_forward_ref
 
 __all__ = ["PythonField"]
+
+
+
 
 
 class PythonField(FieldInfo):
@@ -49,6 +53,8 @@ class PythonField(FieldInfo):
                  union_mode: Literal['smart', 'left_to_right'] = _Unset,
                  fail_fast: bool | None = _Unset,
                  **extra: Unpack[_EmptyKwargs]):
+
+
         super().__init__(
             default=default,
             default_factory=default_factory,
@@ -91,6 +97,7 @@ class PythonField(FieldInfo):
     def render(self):
         field = self.__repr_str__(", ").replace("NoneType", "None").replace("required=False, ", "").replace(
             "required=True, ", "")
+        field = remove_forward_ref(field)
         if self.annotation is None:
             field = field.replace("annotation=None, ", "")
 

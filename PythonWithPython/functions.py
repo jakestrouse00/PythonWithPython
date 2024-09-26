@@ -9,6 +9,8 @@ from .arguments import PythonArgument
 from .code import PythonCode
 from .methods import PythonMethods
 from .utils import tab_spacing
+from .utils import remove_forward_ref
+
 
 __all__ = ["PythonFunction"]
 
@@ -57,15 +59,11 @@ class PythonFunction:
                     return_str = f" -> {self.return_type.__name__}"
                 else:
                     if isinstance(self.return_type, str):
-                        return_str = " -> " + self.return_type.replace("typing.", "").replace("ForwardRef('",
-                                                                                              "").replace("')",
-                                                                                                          "").replace(
+                        return_str = " -> " + remove_forward_ref(self.return_type.replace("typing.", "")).replace(
                             "PythonWithPython.classes.", "")
 
                     else:
-                        return_str = " -> " + repr(self.return_type).replace("typing.", "").replace("ForwardRef('",
-                                                                                                    "").replace("')",
-                                                                                                                "").replace(
+                        return_str = " -> " + remove_forward_ref(repr(self.return_type).replace("typing.", "")).replace(
                             "PythonWithPython.classes.", "")
             else:
                 return_str = " -> None"

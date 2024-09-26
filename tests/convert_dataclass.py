@@ -9,11 +9,15 @@ Convert a Python dataclass into PythonWithPython syntax
 """
 
 
+def gen_number() -> int:
+    return 2022
+
+
 @dataclass
 class Book:
     title: str
     author: str
-    published_year: int = Field(default=2022)
+    published_year: int = Field(default_factory=gen_number)
 
     def is_classic(self) -> bool:
         return self.published_year < 1970

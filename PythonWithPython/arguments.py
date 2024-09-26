@@ -7,7 +7,7 @@ from pydantic.fields import _Unset
 from pydantic_core import PydanticUndefinedType
 
 from .fields import PythonField
-from .utils import tab_spacing
+from .utils import tab_spacing, remove_forward_ref
 
 __all__ = ["PythonArgument"]
 
@@ -47,8 +47,7 @@ class PythonArgument:
         elif isinstance(self.type_hint, type):
             type_hint_name = self.type_hint.__name__
         else:
-            type_hint_name = repr(self.type_hint).replace("typing.", "").replace("ForwardRef('", "").replace("')",
-                                                                                                             "").replace(
+            type_hint_name = remove_forward_ref(repr(self.type_hint).replace("typing.", "")).replace(
                 "PythonWithPython.classes.", "")
         if render_type == "class":
             return f"{indent_str}{self.name}: {type_hint_name}{field_str}"
